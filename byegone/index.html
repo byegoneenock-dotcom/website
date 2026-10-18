@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sharp Cuts Barber Shop | Nakuru</title>
+  <style>
+    :root {
+      --bg: #111;
+      --card: #1b1b1b;
+      --gold: #d4a437;
+      --text: #f2f2f2;
+      --muted: #a8a8a8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Segoe UI", Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    section { padding: 80px 8%; }
+    h2 { font-size: 2rem; text-align: center; margin-bottom: 10px; }
+    h2 span { color: var(--gold); }
+    .sub { text-align: center; color: var(--muted); margin-bottom: 40px; }
+
+    /* NAV */
+    header { position: fixed; top: 0; width: 100%; background: rgba(17,17,17,.95); z-index: 10; border-bottom: 1px solid #222; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 8%; }
+    .logo { font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+    .logo span { color: var(--gold); }
+    nav ul { display: flex; gap: 28px; list-style: none; }
+    nav ul a:hover { color: var(--gold); }
+    .menu-btn { display: none; background: none; border: none; color: var(--text); font-size: 1.8rem; cursor: pointer; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; padding-top: 100px;
+      background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.85)),
+        url("https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1600") center/cover no-repeat;
+    }
+    .hero h1 { font-size: clamp(2.2rem, 6vw, 4rem); }
+    .hero h1 span { color: var(--gold); }
+    .hero p { color: var(--muted); max-width: 520px; margin: 16px 0 28px; }
+    .btn {
+      display: inline-block; background: var(--gold); color: #000; padding: 12px 30px; border-radius: 4px;
+      font-weight: 600; border: none; cursor: pointer; font-size: 1rem; transition: transform .2s, opacity .2s;
+    }
+    .btn:hover { transform: translateY(-2px); opacity: .9; }
+
+    /* SERVICES */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+    .card { background: var(--card); padding: 28px; border-radius: 8px; border: 1px solid #262626; transition: border-color .2s, transform .2s; }
+    .card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .card .icon { font-size: 2rem; margin-bottom: 10px; }
+    .card h3 { margin-bottom: 6px; }
+    .card p { color: var(--muted); font-size: .95rem; }
+    .price { display: block; margin-top: 12px; color: var(--gold); font-weight: 700; font-size: 1.1rem; }
+
+    /* ABOUT */
+    .about { background: #151515; }
+    .about-wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; align-items: center; }
+    .about-img { height: 340px; border-radius: 8px;
+      background: url("https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=900") center/cover; }
+    .about p { color: var(--muted); margin-bottom: 14px; }
+    .stats { display: flex; gap: 30px; margin-top: 20px; }
+    .stats strong { display: block; font-size: 1.8rem; color: var(--gold); }
+
+    /* GALLERY */
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+    .gallery div { height: 220px; border-radius: 8px; background-size: cover; background-position: center; transition: transform .3s; }
+    .gallery div:hover { transform: scale(1.03); }
+
+    /* BOOKING */
+    .booking { background: #151515; }
+    form { max-width: 560px; margin: 0 auto; display: grid; gap: 14px; }
+    input, select, textarea {
+      width: 100%; padding: 12px 14px; background: var(--card); color: var(--text);
+      border: 1px solid #333; border-radius: 4px; font-size: 1rem; font-family: inherit;
+    }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold); }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    #formMsg { text-align: center; color: var(--gold); min-height: 24px; }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; text-align: center; }
+    .contact-grid .card h3 { color: var(--gold); }
+    table { width: 100%; margin-top: 8px; font-size: .95rem; color: var(--muted); }
+    td:last-child { text-align: right; }
+
+    footer { text-align: center; padding: 24px; background: #0a0a0a; color: var(--muted); font-size: .9rem; }
+
+    /* MOBILE */
+    @media (max-width: 760px) {
+      .menu-btn { display: block; }
+      nav ul { display: none; flex-direction: column; gap: 0; position: absolute; top: 100%; left: 0; width: 100%; background: #111; }
+      nav ul.open { display: flex; }
+      nav ul li { padding: 14px 8%; border-top: 1px solid #222; }
+      .row { grid-template-columns: 1fr; }
+      section { padding: 60px 6%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="#home" class="logo">SHARP<span>CUTS</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">&#9776;</button>
+      <ul id="menu">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#booking">Book</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <h1>Look Sharp. <span>Feel Sharp.</span></h1>
+    <p>Premium haircuts, beard trims and grooming in the heart of Nakuru. Walk in a customer, walk out a gentleman.</p>
+    <a href="#booking" class="btn">Book Your Cut</a>
+  </section>
+
+  <section id="services">
+    <h2>Our <span>Services</span></h2>
+    <p class="sub">Quality grooming at fair prices</p>
+    <div class="grid">
+      <div class="card"><div class="icon">&#9986;</div><h3>Classic Haircut</h3><p>Clean cut with scissors or clippers, finished with a hot towel.</p><span class="price">KES 300</span></div>
+      <div class="card"><div class="icon">&#129492;</div><h3>Beard Trim &amp; Shape</h3><p>Precision shaping and lining for a neat, confident look.</p><span class="price">KES 200</span></div>
+      <div class="card"><div class="icon">&#128136;</div><h3>Cut + Beard Combo</h3><p>Our best seller: full haircut plus beard grooming.</p><span class="price">KES 450</span></div>
+      <div class="card"><div class="icon">&#128135;</div><h3>Kids Cut</h3><p>Gentle, patient service for boys under 12.</p><span class="price">KES 200</span></div>
+      <div class="card"><div class="icon">&#128167;</div><h3>Shave &amp; Facial</h3><p>Relaxing hot shave with face cleanse and moisturiser.</p><span class="price">KES 350</span></div>
+      <div class="card"><div class="icon">&#127912;</div><h3>Hair Dye</h3><p>Black, brown or bold colours applied professionally.</p><span class="price">KES 600</span></div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about-wrap">
+      <div class="about-img"></div>
+      <div>
+        <h2 style="text-align:left">About <span>Us</span></h2>
+        <p>Sharp Cuts started with one chair and a passion for great hair. Today we are a trusted barber shop serving Nakuru with skilled barbers, spotless tools and a friendly atmosphere.</p>
+        <p>Every client gets our full attention, because a good haircut is more than a service, it's confidence.</p>
+        <div class="stats">
+          <div><strong>5+</strong>Years</div>
+          <div><strong>3</strong>Barbers</div>
+          <div><strong>2000+</strong>Happy clients</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <h2>Our <span>Work</span></h2>
+    <p class="sub">Fresh cuts from the shop</p>
+    <div class="gallery">
+      <div style="background-image:url('https://images.unsplash.com/photo-1653758265969-b048bb0b328a?w=600')"></div>
+      <div style="background-image:url('https://images.unsplash.com/photo-1717089256239-dc2ed4d9dfc6?w=600')"></div>
+      <div style="background-image:url('https://images.unsplash.com/photo-1699641975121-5c3f55a553e5?w=600')"></div>
+      <div style="background-image:url('https://images.unsplash.com/photo-1686671805337-7d8aa64b965f?w=600')"></div>
+    </div>
+  </section>
+
+  <section class="booking" id="booking">
+    <h2>Book an <span>Appointment</span></h2>
+    <p class="sub">Fill in the form and we'll confirm on WhatsApp</p>
+    <form id="bookingForm">
+      <input type="text" id="name" placeholder="Your name" required />
+      <input type="tel" id="phone" placeholder="Phone number" required />
+      <select id="service" required>
+        <option value="">Select a service</option>
+        <option>Classic Haircut (KES 300)</option>
+        <option>Beard Trim &amp; Shape (KES 200)</option>
+        <option>Cut + Beard Combo (KES 450)</option>
+        <option>Kids Cut (KES 200)</option>
+        <option>Shave &amp; Facial (KES 350)</option>
+        <option>Hair Dye (KES 600)</option>
+      </select>
+      <div class="row">
+        <input type="date" id="date" required />
+        <input type="time" id="time" min="08:00" max="20:00" required />
+      </div>
+      <textarea id="notes" rows="3" placeholder="Anything we should know? (optional)"></textarea>
+      <button type="submit" class="btn">Send Booking via WhatsApp</button>
+      <p id="formMsg"></p>
+    </form>
+  </section>
+
+  <section id="contact">
+    <h2>Visit <span>Us</span></h2>
+    <p class="sub">We'd love to see you</p>
+    <div class="contact-grid">
+      <div class="card"><h3>Location</h3><p>Kabarak Road, Nakuru<br />Kenya</p></div>
+      <div class="card"><h3>Call / WhatsApp</h3><p>+254 769 914 992</p></div>
+      <div class="card">
+        <h3>Opening Hours</h3>
+        <table>
+          <tr><td>Mon - Fri</td><td>8:00 - 20:00</td></tr>
+          <tr><td>Saturday</td><td>8:00 - 21:00</td></tr>
+          <tr><td>Sunday</td><td>10:00 - 17:00</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>&copy; <span id="year"></span> Sharp Cuts Barber Shop, Nakuru. All rights reserved.</footer>
+
+  <script>
+    // Mobile menu
+    const menu = document.getElementById("menu");
+    document.getElementById("menuBtn").addEventListener("click", () => menu.classList.toggle("open"));
+    menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => menu.classList.remove("open")));
+
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Block past dates
+    const dateInput = document.getElementById("date");
+    dateInput.min = new Date().toISOString().split("T")[0];
+
+    // Booking -> WhatsApp
+    // IMPORTANT: replace with your number, country code first, no + or spaces
+    const SHOP_WHATSAPP = "254769914992";
+
+    document.getElementById("bookingForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const service = document.getElementById("service").value;
+      const date = dateInput.value;
+      const time = document.getElementById("time").value;
+      const notes = document.getElementById("notes").value.trim();
+
+      const message =
+        `Hello Sharp Cuts! I'd like to book:\n` +
+        `Name: ${name}\nPhone: ${phone}\nService: ${service}\n` +
+        `Date: ${date}\nTime: ${time}` +
+        (notes ? `\nNotes: ${notes}` : "");
+
+      window.open(`https://wa.me/${SHOP_WHATSAPP}?text=${encodeURIComponent(message)}`, "_blank");
+      document.getElementById("formMsg").textContent = "Opening WhatsApp to confirm your booking...";
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
